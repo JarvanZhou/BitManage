@@ -1,0 +1,9 @@
+F:\GitManage\BitManage\BitManage\BitManage\bin\Debug\BitManage.exe.config
+F:\GitManage\BitManage\BitManage\BitManage\bin\Debug\BitManage.exe
+F:\GitManage\BitManage\BitManage\BitManage\bin\Debug\BitManage.pdb
+F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.csprojResolveAssemblyReference.cache
+F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.Form1.resources
+F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.Properties.Resources.resources
+F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.csproj.GenerateResource.Cache
+F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.exe
+F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.pdb

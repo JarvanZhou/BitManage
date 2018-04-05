@@ -7,3 +7,12 @@ F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.Properties.Resour
 F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.csproj.GenerateResource.Cache
 F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.exe
 F:\GitManage\BitManage\BitManage\BitManage\obj\Debug\BitManage.pdb
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Debug\BitManage.exe.config
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Debug\BitManage.exe
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Debug\BitManage.pdb
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.csprojResolveAssemblyReference.cache
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.MainForm.resources
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.Properties.Resources.resources
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.csproj.GenerateResource.Cache
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.exe
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.pdb

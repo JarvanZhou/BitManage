@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BitManage.MidControler;
+using MQXS.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +13,7 @@ using System.Windows.Forms;
 
 namespace BitManage
 {
-    public partial class MainForm : Form
+    public partial class MainForm : MenuForm
     {
         public MainForm()
         {
@@ -22,6 +24,23 @@ namespace BitManage
         {
             string[] files = Directory.GetFiles("H:\\", "*.jpg");
             imgListPanel.Load(files);
+        }
+
+        private void imgListPanel_ItemDoubleClick(object sender, EventArgs e)
+        {
+            ImgPanel img = (sender as ImgPanel);
+            if (!string.IsNullOrEmpty(img.File))
+            {
+                Bitmap bit = new Bitmap(img.File);
+                picPanel.Bit = bit;
+                imgListPanel.Visible = false;
+            }
+        }
+
+        private void picPanel_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            imgListPanel.Visible = true;
+            picPanel.Bit = null;
         }
     }
 }

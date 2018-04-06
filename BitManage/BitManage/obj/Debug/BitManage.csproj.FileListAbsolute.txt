@@ -16,3 +16,4 @@ E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.Properties.Resourc
 E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.csproj.GenerateResource.Cache
 E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.exe
 E:\Work\Git\BitManage\BitManage\BitManage\obj\Debug\BitManage.pdb
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Debug\MQXSDLL.dll

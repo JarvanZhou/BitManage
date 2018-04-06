@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BitManage.MinControler
+namespace BitManage.MidControler
 {
     public class ImgPanel : Panel
     {
@@ -38,12 +38,15 @@ namespace BitManage.MinControler
                 {
                     _file = value;
                     Bitmap bit = new Bitmap(_file);
+                    Bitmap dst = null;
                     if ((float)bit.Width / bit.Height > (float)6 / 5)
                     {
-                        _bit = new Bitmap(bit, new Size(120, 120 * bit.Height / bit.Width));
+                        dst = new Bitmap(120, 120 * bit.Height / bit.Width);
                     }
                     else
-                    { _bit = new Bitmap(bit, new Size(100 * bit.Width / bit.Height, 100)); }
+                    { dst = new Bitmap(100 * bit.Width / bit.Height, 100); }
+                    Imaging.BitmapThum.GetThum(bit, dst);
+                    _bit = dst;
                     this.Invalidate();
                 }
             }
@@ -55,7 +58,7 @@ namespace BitManage.MinControler
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            using (Pen pen = new Pen(Color.Gray, 2))
+            using (Pen pen = new Pen(Color.YellowGreen, 2))
                 e.Graphics.DrawRectangle(pen, new Rectangle(0, 0, this.Width - 2, this.Height - 2));
             if (_bit != null)
             {
@@ -67,6 +70,11 @@ namespace BitManage.MinControler
             if (!string.IsNullOrEmpty(_file))
             {
                 e.Graphics.DrawString(Path.GetExtension(_file).ToUpper(), this.Font, Brushes.Red, new Point(this.Width - 35, 10));
+                StringFormat sf = new StringFormat();
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+                e.Graphics.DrawString(Path.GetFileNameWithoutExtension(_file), this.Font, Brushes.Black, new Rectangle(10, this.Height- 25,this.Width-10,25), sf);
+                sf.Dispose();
             }
             if (_selected)
             {

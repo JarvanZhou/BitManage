@@ -1,0 +1,9 @@
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\BitManage.exe.config
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.MainForm.resources
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.Properties.Resources.resources
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.csproj.GenerateResource.Cache
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\BitManage.exe
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\BitManage.pdb
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\MQXSDLL.dll
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.exe
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.pdb

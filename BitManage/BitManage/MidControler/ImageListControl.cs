@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BitManage.MinControler
+namespace BitManage.MidControler
 {
     public class ImageListControl : FlowLayoutPanel
     {
@@ -14,6 +14,11 @@ namespace BitManage.MinControler
         {
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.AutoScroll = true;
+        }
+        public event EventHandler ItemDoubleClick
+        {
+            add { _itemdoubleclick += value; }
+            remove{ _itemdoubleclick -= value; }
         }
         public void Load(string[] files)
         {
@@ -23,6 +28,7 @@ namespace BitManage.MinControler
             {
                 ImgPanel img = new ImgPanel();
                 img.MouseClick += Img_MouseClick;
+                img.MouseDoubleClick += (sender, e) => { _itemdoubleclick?.Invoke(sender, e); };
                 this.Controls.Add(img);
             }
             this.ResumeLayout();
@@ -105,5 +111,6 @@ namespace BitManage.MinControler
         private int _threadcount = 6;
         private string[] _files;
         private int _start = 0;
+        private EventHandler _itemdoubleclick;
     }
 }

@@ -7,4 +7,8 @@ E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\BitManage.pdb
 E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\MQXSDLL.dll
 E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.exe
 E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.pdb
+<<<<<<< HEAD
 F:\GitManage\BitManage\BitManage\BitManage\BitManage\bin\Release\BitManage.exe.config
+=======
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.csprojResolveAssemblyReference.cache
+>>>>>>> ddacee8f682a28aed11e9a47c6592c64568a70fe

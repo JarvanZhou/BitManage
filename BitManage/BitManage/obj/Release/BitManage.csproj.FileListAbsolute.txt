@@ -7,3 +7,4 @@ E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\BitManage.pdb
 E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\MQXSDLL.dll
 E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.exe
 E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.pdb
+F:\GitManage\BitManage\BitManage\BitManage\BitManage\bin\Release\BitManage.exe.config

@@ -1,0 +1,30 @@
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\BitManage.exe.config
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.MainForm.resources
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.Properties.Resources.resources
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.csproj.GenerateResource.Cache
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\BitManage.exe
+E:\Work\Git\BitManage\BitManage\BitManage\bin\Release\BitManage.pdb
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.exe
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.pdb
+<<<<<<< HEAD
+F:\GitManage\BitManage\BitManage\BitManage\BitManage\bin\Release\BitManage.exe.config
+=======
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.csprojResolveAssemblyReference.cache
+>>>>>>> ddacee8f682a28aed11e9a47c6592c64568a70fe
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Release\BitManage.exe.config
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Release\BitManage.exe
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Release\BitManage.pdb
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Release\MQXSDLL.dll
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Release\NPOI.dll
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Release\SqliteHelper.dll
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Release\System.Data.SQLite.dll
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Release\BitManage.csprojResolveAssemblyReference.cache
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Release\BitManage.csproj.BitManage.exe.config
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Release\BitManage.MainForm.resources
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Release\BitManage.MidControler.ContentControl.resources
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Release\BitManage.Properties.Resources.resources
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Release\BitManage.csproj.GenerateResource.Cache
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Release\BitManage.exe
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Release\BitManage.pdb
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.csproj.BitManage.exe.config
+E:\Work\Git\BitManage\BitManage\BitManage\obj\Release\BitManage.MidControler.ContentControl.resources

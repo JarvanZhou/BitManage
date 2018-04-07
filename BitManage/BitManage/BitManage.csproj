@@ -136,11 +136,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DLL\MQXSDLL.dll" />
-    <Content Include="DLL\NPOI.dll" />
-    <Content Include="DLL\SQLite.Interop.dll" />
-    <Content Include="DLL\SqliteHelper.dll" />
-    <Content Include="DLL\System.Data.SQLite.dll" />
+    <Folder Include="DLL\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

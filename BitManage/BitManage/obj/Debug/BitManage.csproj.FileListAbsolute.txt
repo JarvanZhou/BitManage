@@ -1,10 +1,6 @@
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\BitManage.exe.config
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\BitManage.exe
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\BitManage.pdb
-E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\MQXSDLL.dll
-E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\NPOI.dll
-E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\SqliteHelper.dll
-E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\System.Data.SQLite.dll
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Debug\BitManage.csproj.BitManage.exe.config
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Debug\BitManage.MainForm.resources
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Debug\BitManage.MidControler.ContentControl.resources

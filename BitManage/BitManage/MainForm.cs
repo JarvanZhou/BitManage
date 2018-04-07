@@ -67,19 +67,21 @@ namespace BitManage
         /// <param name="e"></param>
         private void dirTreeview_DirectoryChanged(object sender, LeftControler.DirectoryChangedEventArgs e)
         {
-
-            string[] png = Directory.GetFiles(e.DirectoryPath, "*.png");
-            string[] jpg = Directory.GetFiles(e.DirectoryPath, "*.jpg");
-            string[] jpeg = Directory.GetFiles(e.DirectoryPath, "*.jpeg");
-            string[] bmp = Directory.GetFiles(e.DirectoryPath, "*.bmp");
-            List<string> files = new List<string>();
-            files.AddRange(png);
-            files.AddRange(jpg);
-            files.AddRange(jpeg);
-            files.AddRange(bmp);
-            files.Sort();
-            imgListPanel.Load(files.ToArray());
-            imgListPanel.Visible = true;
+            if (Directory.Exists(e.DirectoryPath))
+            {
+                string[] png = Directory.GetFiles(e.DirectoryPath, "*.png");
+                string[] jpg = Directory.GetFiles(e.DirectoryPath, "*.jpg");
+                string[] jpeg = Directory.GetFiles(e.DirectoryPath, "*.jpeg");
+                string[] bmp = Directory.GetFiles(e.DirectoryPath, "*.bmp");
+                List<string> files = new List<string>();
+                files.AddRange(png);
+                files.AddRange(jpg);
+                files.AddRange(jpeg);
+                files.AddRange(bmp);
+                files.Sort();
+                imgListPanel.Load(files.ToArray());
+                imgListPanel.Visible = true;
+            }
         }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {

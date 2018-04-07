@@ -58,6 +58,7 @@ namespace BitManage.MidControler
             {
                 throw new Exception("连接数据库失败");
             }
+            
             string sql = "select * from u_picture where u_picture.picture_file='" + bitPath + "';";
             DataTable bitDt = mysql.DBReadTable(sql);
             mysql.DBDisConnect();
@@ -89,7 +90,7 @@ namespace BitManage.MidControler
             if (File.Exists(path))
             {
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-                bitinfo.图片大小 = fs.Length.ToString();
+                bitinfo.图片大小 = fs.Length.ToString()+"byte";
                 fs.Close();
                 fs.Dispose();
 
@@ -106,7 +107,11 @@ namespace BitManage.MidControler
                 bit = null;
             }
         }
-
+        /// <summary>
+        /// 获取位深度
+        /// </summary>
+        /// <param name="format"></param>
+        /// <returns></returns>
         private int GetBitDepth(PixelFormat format)
         {
             switch (format)
@@ -132,15 +137,76 @@ namespace BitManage.MidControler
                     return 8;
             }
         }
-
-        private void btn_submit_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 上传
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpload_MouseUp(object sender, MouseEventArgs e)
         {
-            
+            //未选中图片时点击上传
+            if (_pathArray == null)
+            {
+                return;
+            }
+            SqliteHelper.SqliteHelper mysql = new SqliteHelper.SqliteHelper();
+            try
+            {
+                btnUpload.Enabled = false;
+
+                if (_pathArray.Length == 1)
+                {
+                    BitInfo bitinfo = this.pg_context.SelectedObject as BitInfo;
+                    if (!mysql.DBConnect(_localDBname))
+                    {
+                        throw new Exception("连接数据库失败");
+                    }
+                    string res = InsertDB(_pathArray[0], bitinfo, mysql);
+                }
+                else if (_pathArray.Length > 1)
+                {
+                    BitInfo bitinfo = this.pg_context.SelectedObject as BitInfo;
+                    BitInfo[] bitInfoArray = new BitInfo[_pathArray.Length];
+                    for (int i = 0; i < _pathArray.Length; i++)
+                    {
+                        bitInfoArray[i] = bitinfo.Clone();
+                        GetBitmapInfo(_pathArray[i], bitInfoArray[i]);
+                    }
+
+                    if (!mysql.DBConnect(_localDBname))
+                    {
+                        throw new Exception("连接数据库失败");
+                    }
+                    string res = string.Empty;
+                    for (int i = 0; i < _pathArray.Length; i++)
+                    {
+                        res = InsertDB(_pathArray[0], bitInfoArray[i], mysql);
+                        if (!string.IsNullOrEmpty(res))
+                        {
+                            throw new Exception(res);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("数据库数据有误，存在多条相同的记录");
+                }
+                MessageBox.Show("上传成功");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                btnUpload.Enabled = true;
+                mysql.DBDisConnect();
+            }
         }
 
         private string InsertDB(string bitPath, BitInfo info, SqliteHelper.SqliteHelper mysql)
         {
-            string sql = "select * from u_picture where u_picture.picture_file='" + bitPath.Replace("\\", "\\\\") + "';";
+            string sql = "select * from u_picture where u_picture.picture_file='" + bitPath + "';";
             DataTable dt = mysql.DBReadTable(sql);
             if (dt == null)
             {
@@ -220,58 +286,6 @@ namespace BitManage.MidControler
         private string[] _pathArray;
         private string _localDBname = "local.db";
 
-        private void btnUpload_MouseUp(object sender, MouseEventArgs e)
-        {
-            SqliteHelper.SqliteHelper mysql = new SqliteHelper.SqliteHelper();
-            try
-            {
-                if (_pathArray.Length == 1)
-                {
-                    BitInfo bitinfo = this.pg_context.SelectedObject as BitInfo;
-                    if (!mysql.DBConnect(_localDBname))
-                    {
-                        throw new Exception("连接数据库失败");
-                    }
-                    string res = InsertDB(_pathArray[0], bitinfo, mysql);
-                }
-                else if (_pathArray.Length > 1)
-                {
-                    BitInfo bitinfo = this.pg_context.SelectedObject as BitInfo;
-                    BitInfo[] bitInfoArray = new BitInfo[_pathArray.Length];
-                    for (int i = 0; i < _pathArray.Length; i++)
-                    {
-                        bitInfoArray[i] = bitinfo.Clone();
-                        GetBitmapInfo(_pathArray[i], bitInfoArray[i]);
-                    }
-
-                    if (!mysql.DBConnect(_localDBname))
-                    {
-                        throw new Exception("连接数据库失败");
-                    }
-                    string res = string.Empty;
-                    for (int i = 0; i < _pathArray.Length; i++)
-                    {
-                        res = InsertDB(_pathArray[0], bitInfoArray[i], mysql);
-                        if (!string.IsNullOrEmpty(res))
-                        {
-                            throw new Exception(res);
-                        }
-                    }
-                }
-                else
-                {
-                    throw new Exception("数据库数据有误，存在多条相同的记录");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                mysql.DBDisConnect();
-            }
-        }
     }
 
     [DefaultPropertyAttribute("标题")]

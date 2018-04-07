@@ -31,3 +31,4 @@ E:\Work\Git\Picture\BitManage\BitManage\BitManage\obj\Debug\BitManage.MidControl
 E:\Work\Git\Picture\BitManage\BitManage\BitManage\obj\Debug\BitManage.MidControler.ImgPanel.resources
 E:\Work\Git\Picture\BitManage\BitManage\BitManage\obj\Debug\BitManage.Properties.Resources.resources
 E:\Work\Git\Picture\BitManage\BitManage\BitManage\obj\Debug\BitManage.csproj.GenerateResource.Cache
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Debug\BitManage.LeftControler.TreeControl.resources

@@ -22,7 +22,7 @@ namespace BitManage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] files = Directory.GetFiles("H:\\", "*.jpg");
+            string[] files = Directory.GetFiles(@"C:\Users\jarvan\Desktop\pic", "*.png");
             imgListPanel.Load(files);
         }
 
@@ -34,6 +34,17 @@ namespace BitManage
                 Bitmap bit = new Bitmap(img.File);
                 picPanel.Bit = bit;
                 imgListPanel.Visible = false;
+
+                try
+                {
+                    ContentControl cc = new ContentControl(img.File);
+                    cc.Location = new Point(900, 0);
+                    cc.Parent = this.tableLayoutPanel1;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());    
+                }
             }
         }
 

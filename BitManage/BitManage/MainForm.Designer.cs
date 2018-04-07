@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
-            this.picPanel = new MidControler.BitmapPanel();
+            this.picPanel = new BitManage.MidControler.BitmapPanel();
             this.imgListPanel = new BitManage.MidControler.ImageListControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.picPanel.SuspendLayout();
@@ -68,12 +69,15 @@
             // 
             // picPanel
             // 
+            this.picPanel.Bit = null;
             this.picPanel.Controls.Add(this.imgListPanel);
             this.picPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picPanel.Loc = ((System.Drawing.PointF)(resources.GetObject("picPanel.Loc")));
             this.picPanel.Location = new System.Drawing.Point(255, 4);
             this.picPanel.Name = "picPanel";
             this.picPanel.Size = new System.Drawing.Size(527, 602);
             this.picPanel.TabIndex = 1;
+            this.picPanel.Zoom = 1F;
             this.picPanel.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.picPanel_MouseDoubleClick);
             // 
             // imgListPanel

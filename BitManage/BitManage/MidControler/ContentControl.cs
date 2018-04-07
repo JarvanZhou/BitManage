@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Data.SQLite;
 
 namespace BitManage.MidControler
 {
@@ -18,23 +19,31 @@ namespace BitManage.MidControler
         public ContentControl()
         {
             InitializeComponent();
-            SetComboArray();
         }
-
-        public ContentControl(string bitPath)
+        /// <summary>
+        /// 设置显示图片信息
+        /// </summary>
+        /// <param name="bitpaths"></param>
+        public void SetBitContent(string[] bitpaths)
         {
-            InitializeComponent();
-            SetComboArray();
-            BitInfo info = GetBitInfo(bitPath);
-            this.pg_context.SelectedObject = info;
-        }
+            if (_pathArray != null && _pathArray[0].Equals(bitpaths[0]))
+            {
+                return;
+            }
+            //第一次进来时加载配置文件
+            if (_pathArray == null)
+            {
+                SetComboArray();
+            }
 
-        public ContentControl(string[] bitpaths)
-        {
-            InitializeComponent();
-            SetComboArray();
             BitInfo info = GetBitInfo(bitpaths[0]);
+            if (this.pg_context.SelectedObject != null)
+            {
+                this.pg_context.SelectedObject = null;
+            }
+            this.pg_context.Refresh();
             this.pg_context.SelectedObject = info;
+            _pathArray = bitpaths;
         }
 
         private BitInfo GetBitInfo(string bitPath)
@@ -75,6 +84,11 @@ namespace BitManage.MidControler
             bitinfo.路径 = path;
             if (File.Exists(path))
             {
+                FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+                bitinfo.图片大小 = fs.Length.ToString();
+                fs.Close();
+                fs.Dispose();
+
                 Bitmap bit = new Bitmap(path);
                 bitinfo.图片宽 = bit.Width.ToString();
                 bitinfo.图片高 = bit.Height.ToString();
@@ -83,7 +97,7 @@ namespace BitManage.MidControler
                 bitinfo.水平分辨率 = bit.HorizontalResolution.ToString();
                 bitinfo.位深度 = GetBitDepth(bit.PixelFormat).ToString();
                 bitinfo.gps信息 = "";
-                bitinfo.图片大小 = new FileStream(path, FileMode.OpenOrCreate).Length.ToString();
+
                 bit.Dispose();
                 bit = null;
             }
@@ -170,7 +184,7 @@ namespace BitManage.MidControler
 
         private string InsertDB(string bitPath, BitInfo info, SqliteHelper.SqliteHelper mysql)
         {
-            string sql = "select * from u_picture wehre u_picture.picture_file='" + bitPath + "';";
+            string sql = "select * from u_picture where u_picture.picture_file='" + bitPath.Replace("\\", "\\\\") + "';";
             DataTable dt = mysql.DBReadTable(sql);
             if (dt == null)
             {
@@ -196,11 +210,13 @@ namespace BitManage.MidControler
             }
             else
             {
-
+                return "数据库数据有误，存在多条相同的记录";
             }
             return string.Empty;
         }
-
+        /// <summary>
+        /// 加载配置文件
+        /// </summary>
         private void SetComboArray()
         {
             string excelPath = @"配置文件.xls";
@@ -341,6 +357,31 @@ namespace BitManage.MidControler
         [CategoryAttribute("图片数据")
         DataTableConvertAttribute("picture_format")]
         public string 图片格式 { get; set; }
+
+        public BitInfo()
+        {
+            this.gps信息 = string.Empty;
+            this.人物 = string.Empty;
+            this.位深度 = string.Empty;
+            this.作者 = string.Empty;
+            this.关键词 = string.Empty;
+            this.分类 = string.Empty;
+            this.图片大小 = string.Empty;
+            this.图片宽 = string.Empty;
+            this.图片格式 = string.Empty;
+            this.图片高 = string.Empty;
+            this.垂直分辨率 = string.Empty;
+            this.摘要 = string.Empty;
+            this.文件名称 = string.Empty;
+            this.时间 = string.Empty;
+            this.机构 = string.Empty;
+            this.标引人 = string.Empty;
+            this.标引时间 = string.Empty;
+            this.标题 = string.Empty;
+            this.水平分辨率 = string.Empty;
+            this.评级 = string.Empty;
+            this.路径 = string.Empty;
+        }
 
         public BitInfo Clone()
         {

@@ -36,13 +36,13 @@
             // 
             this.pg_context.Location = new System.Drawing.Point(3, 0);
             this.pg_context.Name = "pg_context";
-            this.pg_context.Size = new System.Drawing.Size(277, 472);
+            this.pg_context.Size = new System.Drawing.Size(277, 545);
             this.pg_context.TabIndex = 0;
             // 
             // btn_submit
             // 
             this.btn_submit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_submit.Location = new System.Drawing.Point(74, 478);
+            this.btn_submit.Location = new System.Drawing.Point(67, 551);
             this.btn_submit.Name = "btn_submit";
             this.btn_submit.Size = new System.Drawing.Size(124, 42);
             this.btn_submit.TabIndex = 1;
@@ -57,7 +57,7 @@
             this.Controls.Add(this.btn_submit);
             this.Controls.Add(this.pg_context);
             this.Name = "ContentControl";
-            this.Size = new System.Drawing.Size(283, 535);
+            this.Size = new System.Drawing.Size(283, 608);
             this.ResumeLayout(false);
 
         }

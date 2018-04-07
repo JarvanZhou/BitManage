@@ -33,6 +33,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.picPanel = new BitManage.MidControler.BitmapPanel();
             this.imgListPanel = new BitManage.MidControler.ImageListControl();
+            this.contentControl = new BitManage.MidControler.ContentControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.picPanel.SuspendLayout();
             this.SuspendLayout();
@@ -50,6 +51,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 318F));
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.picPanel, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.contentControl, 2, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 42);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -90,6 +92,13 @@
             this.imgListPanel.TabIndex = 0;
             this.imgListPanel.ItemDoubleClick += new System.EventHandler(this.imgListPanel_ItemDoubleClick);
             // 
+            // contentControl
+            // 
+            this.contentControl.Location = new System.Drawing.Point(789, 4);
+            this.contentControl.Name = "contentControl";
+            this.contentControl.Size = new System.Drawing.Size(283, 602);
+            this.contentControl.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -115,6 +124,7 @@
         private MidControler.ImageListControl imgListPanel;
         private System.Windows.Forms.Button button1;
         private BitManage.MidControler.BitmapPanel picPanel;
+        private MidControler.ContentControl contentControl;
     }
 }
 

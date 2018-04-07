@@ -58,6 +58,9 @@
             this.btnUpload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnUpload.TabIndex = 2;
             this.btnUpload.TabStop = false;
+            this.btnUpload.Paint += new System.Windows.Forms.PaintEventHandler(this.btn_Paint);
+            this.btnUpload.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
+            this.btnUpload.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btn_MouseMove);
             this.btnUpload.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnUpload_MouseUp);
             // 
             // btnDownload
@@ -72,6 +75,9 @@
             this.btnDownload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnDownload.TabIndex = 3;
             this.btnDownload.TabStop = false;
+            this.btnDownload.Paint += new System.Windows.Forms.PaintEventHandler(this.btn_Paint);
+            this.btnDownload.MouseLeave += new System.EventHandler(this.btn_MouseLeave);
+            this.btnDownload.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btn_MouseMove);
             this.btnDownload.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnDownload_MouseUp);
             // 
             // ContentControl

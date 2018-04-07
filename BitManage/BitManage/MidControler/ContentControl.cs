@@ -22,6 +22,7 @@ namespace BitManage.MidControler
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             ToolTip tip = new ToolTip();
             tip.SetToolTip(btnUpload, "上传数据");
+            tip.SetToolTip(btnDownload, "下载数据");
         }
         /// <summary>
         /// 设置显示图片信息
@@ -251,7 +252,25 @@ namespace BitManage.MidControler
                 }
             }
         }
+        private void btn_MouseMove(object sender, MouseEventArgs e)
+        {
+            (sender as PictureBox).Invalidate();
+        }
 
+        private void btn_MouseLeave(object sender, EventArgs e)
+        {
+            (sender as PictureBox).Invalidate();
+        }
+        private void btn_Paint(object sender, PaintEventArgs e)
+        {
+            PictureBox pic = (sender as PictureBox);
+            Point p = pic.PointToClient(Control.MousePosition);
+            if (pic.ClientRectangle.Contains(p.X, p.Y))
+            {
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(100, Color.YellowGreen)))
+                    e.Graphics.FillRectangle(brush, pic.ClientRectangle);
+            }
+        }
         private string InsertDB(string bitPath, BitInfo info, SqliteHelper.SqliteHelper mysql)
         {
             string sql = "select * from u_picture where u_picture.picture_file='" + bitPath + "';";
@@ -292,7 +311,11 @@ namespace BitManage.MidControler
             string excelPath = @"配置文件.xls";
             if (!File.Exists(excelPath))
             {
-                throw new Exception("未找到配置文件");
+                TypeConverter.Array = new string[] { "" };
+                PersonConverter.Array = new string[] { "" };
+                OrgConverter.Array = new string[] { "" };
+                return;
+                //throw new Exception("未找到配置文件");
             }
             DataTable dt = ExcelHandler.ReadExcelToDataTable(excelPath);
             if ((from DataColumn column in dt.Columns where column.ColumnName.Equals("分类") select column).ToArray().Length != 1)

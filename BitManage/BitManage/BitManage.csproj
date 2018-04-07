@@ -112,6 +112,9 @@
     <EmbeddedResource Include="MidControler\ContentControl.resx">
       <DependentUpon>ContentControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MidControler\ImgPanel.resx">
+      <DependentUpon>ImgPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

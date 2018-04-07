@@ -68,20 +68,13 @@ namespace BitManage
             this.imgListPanel.Focus();
         }
 
-        //private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Control && e.KeyData == Keys.A)
-        //    {
-        //        for (int i = 0; i < this.Controls.Count; i++)
-        //        {
-        //            ImgPanel ip = this.Controls[i] as ImgPanel;
-        //            if (!ip.Selected)
-        //            {
-        //                ip.Selected = true;
-        //            }
-        //        }
-        //        imgListPanel_ItemClick(null, null);
-        //    }
-        //}
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
+            {
+                this.imgListPanel.CtrlA();
+                imgListPanel_ItemClick(null, null);
+            }
+        }
     }
 }

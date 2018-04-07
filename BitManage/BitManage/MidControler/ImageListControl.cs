@@ -130,20 +130,24 @@ namespace BitManage.MidControler
 
         //protected override void OnKeyDown(KeyEventArgs e)
         //{
-        //    if (e.Control && e.KeyData == Keys.A)
+        //    if (e.Modifiers==Keys.Control && e.KeyData == Keys.A)
         //    {
-        //        for (int i = 0; i < this.Controls.Count; i++)
-        //        {
-        //            ImgPanel ip = this.Controls[i] as ImgPanel;
-        //            if (!ip.Selected)
-        //            {
-        //                ip.Selected = true;
-        //            }
-        //        }
-        //        _itemClick?.Invoke(this, null);
+                
         //    }
         //    base.OnKeyDown(e);
         //}
+
+        public void CtrlA()
+        {
+            for (int i = 0; i < this.Controls.Count; i++)
+            {
+                ImgPanel ip = this.Controls[i] as ImgPanel;
+                if (!ip.Selected)
+                {
+                    ip.Selected = true;
+                }
+            }
+        }
 
         private int _index;
         private int _count;

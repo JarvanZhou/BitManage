@@ -115,6 +115,7 @@
             this.NewRightMenuColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(197)))), ((int)(((byte)(254)))));
             this.NewShadowWidth = 3;
             this.Text = "图片标引工具";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.picPanel.ResumeLayout(false);
             this.ResumeLayout(false);

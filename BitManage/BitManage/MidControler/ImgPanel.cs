@@ -15,6 +15,7 @@ namespace BitManage.MidControler
         {
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.Size = new System.Drawing.Size(165, 145);
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
         }
         /// <summary>
         /// 获取或设置是否选中
@@ -58,8 +59,10 @@ namespace BitManage.MidControler
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             using (Pen pen = new Pen(Color.YellowGreen, 2))
-                e.Graphics.DrawRectangle(pen, new Rectangle(0, 0, this.Width - 2, this.Height - 2));
+                e.Graphics.DrawRectangle(pen, new Rectangle(1, 1, this.Width - 2, this.Height - 2));
             if (_bit != null)
             {
                 Rectangle rect = new Rectangle((this.Width - _bit.Width) / 2, (this.Height - _bit.Height) / 2, _bit.Width, _bit.Height);
@@ -69,16 +72,16 @@ namespace BitManage.MidControler
             }
             if (!string.IsNullOrEmpty(_file))
             {
-                e.Graphics.DrawString(Path.GetExtension(_file).ToUpper(), this.Font, Brushes.Red, new Point(this.Width - 35, 10));
+                e.Graphics.DrawString(Path.GetExtension(_file).Substring(1).ToUpper(), this.Font, Brushes.Red, new Point(this.Width - 35, 10));
                 StringFormat sf = new StringFormat();
                 sf.Alignment = StringAlignment.Center;
                 sf.LineAlignment = StringAlignment.Center;
-                e.Graphics.DrawString(Path.GetFileNameWithoutExtension(_file), this.Font, Brushes.Black, new Rectangle(10, this.Height- 25,this.Width-10,25), sf);
+                e.Graphics.DrawString(Path.GetFileNameWithoutExtension(_file), this.Font, Brushes.Black, new Rectangle(10, this.Height - 25, this.Width - 10, 25), sf);
                 sf.Dispose();
             }
             if (_selected)
             {
-                using (SolidBrush brush = new SolidBrush(Color.FromArgb(50, Color.Blue)))
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(50, Color.LightBlue)))
                     e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
         }
@@ -87,5 +90,16 @@ namespace BitManage.MidControler
         private string _file;
         private bool _selected;
         private Bitmap _bit;
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // ImgPanel
+            // 
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ResumeLayout(false);
+
+        }
     }
 }

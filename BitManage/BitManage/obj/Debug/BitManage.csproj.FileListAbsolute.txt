@@ -13,3 +13,4 @@ E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\MQXSDLL.dll
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\NPOI.dll
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\SqliteHelper.dll
 E:\myProgram\GitLocal\BitManage\BitManage\BitManage\bin\Debug\System.Data.SQLite.dll
+E:\myProgram\GitLocal\BitManage\BitManage\BitManage\obj\Debug\BitManage.MidControler.ImgPanel.resources

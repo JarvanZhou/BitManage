@@ -48,6 +48,10 @@ namespace BitManage.MidControler
                     { dst = new Bitmap(100 * bit.Width / bit.Height, 100); }
                     Imaging.BitmapThum.GetThum(bit, dst);
                     _bit = dst;
+                    if (bit != null)
+                    {
+                        bit.Dispose(); bit = null;
+                    }
                     this.Invalidate();
                 }
             }
@@ -81,7 +85,7 @@ namespace BitManage.MidControler
             }
             if (_selected)
             {
-                using (SolidBrush brush = new SolidBrush(Color.FromArgb(50, Color.LightBlue)))
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(80, Color.LightBlue)))
                     e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
         }

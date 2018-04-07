@@ -19,6 +19,9 @@ namespace BitManage.MidControler
         public ContentControl()
         {
             InitializeComponent();
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            ToolTip tip = new ToolTip();
+            tip.SetToolTip(btnUpload, "上传数据");
         }
         /// <summary>
         /// 设置显示图片信息
@@ -132,55 +135,7 @@ namespace BitManage.MidControler
 
         private void btn_submit_Click(object sender, EventArgs e)
         {
-            SqliteHelper.SqliteHelper mysql = new SqliteHelper.SqliteHelper();
-            try
-            {
-                if (_pathArray.Length == 1)
-                {
-                    BitInfo bitinfo = this.pg_context.SelectedObject as BitInfo;
-                    if (!mysql.DBConnect(_localDBname))
-                    {
-                        throw new Exception("连接数据库失败");
-                    }
-                    string res = InsertDB(_pathArray[0], bitinfo, mysql);
-                }
-                else if (_pathArray.Length > 1)
-                {
-                    BitInfo bitinfo = this.pg_context.SelectedObject as BitInfo;
-                    BitInfo[] bitInfoArray = new BitInfo[_pathArray.Length];
-                    for (int i = 0; i < _pathArray.Length; i++)
-                    {
-                        bitInfoArray[i] = bitinfo.Clone();
-                        GetBitmapInfo(_pathArray[i], bitInfoArray[i]);
-                    }
-
-                    if (!mysql.DBConnect(_localDBname))
-                    {
-                        throw new Exception("连接数据库失败");
-                    }
-                    string res = string.Empty;
-                    for (int i = 0; i < _pathArray.Length; i++)
-                    {
-                        res = InsertDB(_pathArray[0], bitInfoArray[i], mysql);
-                        if (!string.IsNullOrEmpty(res))
-                        {
-                            throw new Exception(res);
-                        }
-                    }
-                }
-                else
-                {
-                    throw new Exception("数据库数据有误，存在多条相同的记录");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                mysql.DBDisConnect();
-            }
+            
         }
 
         private string InsertDB(string bitPath, BitInfo info, SqliteHelper.SqliteHelper mysql)
@@ -264,6 +219,59 @@ namespace BitManage.MidControler
 
         private string[] _pathArray;
         private string _localDBname = "local.db";
+
+        private void btnUpload_MouseUp(object sender, MouseEventArgs e)
+        {
+            SqliteHelper.SqliteHelper mysql = new SqliteHelper.SqliteHelper();
+            try
+            {
+                if (_pathArray.Length == 1)
+                {
+                    BitInfo bitinfo = this.pg_context.SelectedObject as BitInfo;
+                    if (!mysql.DBConnect(_localDBname))
+                    {
+                        throw new Exception("连接数据库失败");
+                    }
+                    string res = InsertDB(_pathArray[0], bitinfo, mysql);
+                }
+                else if (_pathArray.Length > 1)
+                {
+                    BitInfo bitinfo = this.pg_context.SelectedObject as BitInfo;
+                    BitInfo[] bitInfoArray = new BitInfo[_pathArray.Length];
+                    for (int i = 0; i < _pathArray.Length; i++)
+                    {
+                        bitInfoArray[i] = bitinfo.Clone();
+                        GetBitmapInfo(_pathArray[i], bitInfoArray[i]);
+                    }
+
+                    if (!mysql.DBConnect(_localDBname))
+                    {
+                        throw new Exception("连接数据库失败");
+                    }
+                    string res = string.Empty;
+                    for (int i = 0; i < _pathArray.Length; i++)
+                    {
+                        res = InsertDB(_pathArray[0], bitInfoArray[i], mysql);
+                        if (!string.IsNullOrEmpty(res))
+                        {
+                            throw new Exception(res);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("数据库数据有误，存在多条相同的记录");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                mysql.DBDisConnect();
+            }
+        }
     }
 
     [DefaultPropertyAttribute("标题")]

@@ -19,13 +19,6 @@ namespace BitManage
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string[] files = Directory.GetFiles(@"C:\Users\jarvan\Desktop\pic", "*.png");
-            imgListPanel.Load(files);
-        }
-
         private void imgListPanel_ItemDoubleClick(object sender, EventArgs e)
         {
             ImgPanel img = (sender as ImgPanel);
@@ -67,7 +60,27 @@ namespace BitManage
         {
             this.imgListPanel.Focus();
         }
+        /// <summary>
+        /// 切换目录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dirTreeview_DirectoryChanged(object sender, LeftControler.DirectoryChangedEventArgs e)
+        {
 
+            string[] png = Directory.GetFiles(e.DirectoryPath, "*.png");
+            string[] jpg = Directory.GetFiles(e.DirectoryPath, "*.jpg");
+            string[] jpeg = Directory.GetFiles(e.DirectoryPath, "*.jpeg");
+            string[] bmp = Directory.GetFiles(e.DirectoryPath, "*.bmp");
+            List<string> files = new List<string>();
+            files.AddRange(png);
+            files.AddRange(jpg);
+            files.AddRange(jpeg);
+            files.AddRange(bmp);
+            files.Sort();
+            imgListPanel.Load(files.ToArray());
+            imgListPanel.Visible = true;
+        }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)

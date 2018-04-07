@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContentControl));
             this.pg_context = new System.Windows.Forms.PropertyGrid();
             this.btnUpload = new System.Windows.Forms.PictureBox();
+            this.btnDownload = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnUpload)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDownload)).BeginInit();
             this.SuspendLayout();
             // 
             // pg_context
@@ -49,7 +51,7 @@
             this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUpload.BackColor = System.Drawing.Color.Transparent;
             this.btnUpload.Image = ((System.Drawing.Image)(resources.GetObject("btnUpload.Image")));
-            this.btnUpload.Location = new System.Drawing.Point(244, -1);
+            this.btnUpload.Location = new System.Drawing.Point(209, 0);
             this.btnUpload.Margin = new System.Windows.Forms.Padding(0);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(37, 26);
@@ -58,15 +60,31 @@
             this.btnUpload.TabStop = false;
             this.btnUpload.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnUpload_MouseUp);
             // 
+            // btnDownload
+            // 
+            this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDownload.BackColor = System.Drawing.Color.Transparent;
+            this.btnDownload.Image = ((System.Drawing.Image)(resources.GetObject("btnDownload.Image")));
+            this.btnDownload.Location = new System.Drawing.Point(246, 0);
+            this.btnDownload.Margin = new System.Windows.Forms.Padding(0);
+            this.btnDownload.Name = "btnDownload";
+            this.btnDownload.Size = new System.Drawing.Size(37, 26);
+            this.btnDownload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnDownload.TabIndex = 3;
+            this.btnDownload.TabStop = false;
+            this.btnDownload.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnDownload_MouseUp);
+            // 
             // ContentControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.pg_context);
             this.Name = "ContentControl";
             this.Size = new System.Drawing.Size(283, 398);
             ((System.ComponentModel.ISupportInitialize)(this.btnUpload)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDownload)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -75,5 +93,6 @@
 
         private System.Windows.Forms.PropertyGrid pg_context;
         private System.Windows.Forms.PictureBox btnUpload;
+        private System.Windows.Forms.PictureBox btnDownload;
     }
 }

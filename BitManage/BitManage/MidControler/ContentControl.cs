@@ -58,7 +58,7 @@ namespace BitManage.MidControler
             {
                 throw new Exception("连接数据库失败");
             }
-            
+
             string sql = "select * from u_picture where u_picture.picture_file='" + bitPath + "';";
             DataTable bitDt = mysql.DBReadTable(sql);
             mysql.DBDisConnect();
@@ -90,7 +90,7 @@ namespace BitManage.MidControler
             if (File.Exists(path))
             {
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-                bitinfo.图片大小 = fs.Length.ToString()+"byte";
+                bitinfo.图片大小 = fs.Length.ToString() + "byte";
                 fs.Close();
                 fs.Dispose();
 
@@ -101,10 +101,9 @@ namespace BitManage.MidControler
                 bitinfo.垂直分辨率 = bit.VerticalResolution.ToString();
                 bitinfo.水平分辨率 = bit.HorizontalResolution.ToString();
                 bitinfo.位深度 = GetBitDepth(bit.PixelFormat).ToString();
-                bitinfo.gps信息 = "";
-
                 bit.Dispose();
                 bit = null;
+                bitinfo.gps信息 = fnGPS坐标(path);
             }
         }
         /// <summary>
@@ -203,6 +202,55 @@ namespace BitManage.MidControler
                 mysql.DBDisConnect();
             }
         }
+        /// <summary>
+        /// 下载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDownload_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (_pathArray == null)
+            {
+                return;
+            }
+            FolderBrowserDialog gbd = new FolderBrowserDialog();
+            if (gbd.ShowDialog() == DialogResult.OK)
+            {
+                string path = gbd.SelectedPath + "\\记录表_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
+                SqliteHelper.SqliteHelper mysql = new SqliteHelper.SqliteHelper();
+                if (!mysql.DBConnect(_localDBname))
+                {
+                    MessageBox.Show("查询数据库失败");
+                }
+                try
+                {
+                    string content = string.Join("','", _pathArray);
+                    string sql = "select picture_name as 文件名称, picture_file as 路径, picture_title as 标题,picture_time as 时间,picture_author as 作者,picture_level as 评级,picture_info as 摘要,picture_key as 关键词,picture_person as 人物,picture_org as 机构,picture_type as 分类,picture_marker as 标引人,picture_marktime as 标引时间,picture_width as 图片宽,picture_height as 图片高,picture_hr as 水平分辨率,picture_vr as 垂直分辨率,picture_bit as 位深度,picture_gps as gps信息,picture_size as 图片大小,picture_format as 图片格式 from u_picture where picture_file in ('" + content + "')";
+                    DataTable dt = mysql.DBReadTable(sql);
+                    if (dt == null)
+                    {
+                        throw new Exception("查询数据库失败");
+                    }
+                    bool res = ExcelHandler.Write(path, dt);
+                    if (!res)
+                    {
+                        throw new Exception("导出表格失败");
+                    }
+                    else
+                    {
+                        MessageBox.Show("导出成功");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    mysql.DBDisConnect();
+                }
+            }
+        }
 
         private string InsertDB(string bitPath, BitInfo info, SqliteHelper.SqliteHelper mysql)
         {
@@ -281,6 +329,88 @@ namespace BitManage.MidControler
             TypeConverter.Array = typeList.ToArray();
             PersonConverter.Array = personList.ToArray();
             OrgConverter.Array = orgList.ToArray();
+        }
+
+        /// <summary>
+        /// 获取图片中的GPS坐标点
+        /// </summary>
+        /// <param name="p_图片路径">图片路径</param>
+        /// <returns>返回坐标【纬度+经度】用"+"分割 取数组中第0和1个位置的值</returns>
+        public String fnGPS坐标(String p_图片路径)
+        {
+            String s_GPS坐标 = "";
+            //载入图片   
+            Image objImage = Image.FromFile(p_图片路径);
+            //取得所有的属性(以PropertyId做排序)   
+            var propertyItems = objImage.PropertyItems.OrderBy(x => x.Id);
+            //暂定纬度N(北纬)   
+            char chrGPSLatitudeRef = 'N';
+            //暂定经度为E(东经)   
+            char chrGPSLongitudeRef = 'E';
+            foreach (PropertyItem objItem in propertyItems)
+            {
+                //只取Id范围为0x0000到0x001e
+                if (objItem.Id >= 0x0000 && objItem.Id <= 0x001e)
+                {
+                    objItem.Id = 0x0002;
+                    switch (objItem.Id)
+                    {
+                        case 0x0000:
+                            var query = from tmpb in objItem.Value select tmpb.ToString();
+                            string sreVersion = string.Join(".", query.ToArray());
+                            break;
+                        case 0x0001:
+                            chrGPSLatitudeRef = BitConverter.ToChar(objItem.Value, 0);
+                            break;
+                        case 0x0002:
+                            if (objItem.Value.Length == 24)
+                            {
+                                //degrees(将byte[0]~byte[3]转成uint, 除以byte[4]~byte[7]转成的uint)   
+                                double d = BitConverter.ToUInt32(objItem.Value, 0) * 1.0d / BitConverter.ToUInt32(objItem.Value, 4);
+                                //minutes(将byte[8]~byte[11]转成uint, 除以byte[12]~byte[15]转成的uint)   
+                                double m = BitConverter.ToUInt32(objItem.Value, 8) * 1.0d / BitConverter.ToUInt32(objItem.Value, 12);
+                                //seconds(将byte[16]~byte[19]转成uint, 除以byte[20]~byte[23]转成的uint)   
+                                double s = BitConverter.ToUInt32(objItem.Value, 16) * 1.0d / BitConverter.ToUInt32(objItem.Value, 20);
+                                //计算经纬度数值, 如果是南纬, 要乘上(-1)   
+                                double dblGPSLatitude = (((s / 60 + m) / 60) + d) * (chrGPSLatitudeRef.Equals('N') ? 1 : -1);
+                                string strLatitude = string.Format("{0:#} deg {1:#}' {2:#.00}\" {3}", d
+                                                                    , m, s, chrGPSLatitudeRef);
+                                //纬度+经度
+                                s_GPS坐标 += dblGPSLatitude + "+";
+                            }
+                            break;
+                        case 0x0003:
+                            //透过BitConverter, 将Value转成Char('E' / 'W')   
+                            //此值在后续的Longitude计算上会用到   
+                            chrGPSLongitudeRef = BitConverter.ToChar(objItem.Value, 0);
+                            break;
+                        case 0x0004:
+                            if (objItem.Value.Length == 24)
+                            {
+                                //degrees(将byte[0]~byte[3]转成uint, 除以byte[4]~byte[7]转成的uint)   
+                                double d = BitConverter.ToUInt32(objItem.Value, 0) * 1.0d / BitConverter.ToUInt32(objItem.Value, 4);
+                                //minutes(将byte[8]~byte[11]转成uint, 除以byte[12]~byte[15]转成的uint)   
+                                double m = BitConverter.ToUInt32(objItem.Value, 8) * 1.0d / BitConverter.ToUInt32(objItem.Value, 12);
+                                //seconds(将byte[16]~byte[19]转成uint, 除以byte[20]~byte[23]转成的uint)   
+                                double s = BitConverter.ToUInt32(objItem.Value, 16) * 1.0d / BitConverter.ToUInt32(objItem.Value, 20);
+                                //计算精度的数值, 如果是西经, 要乘上(-1)   
+                                double dblGPSLongitude = (((s / 60 + m) / 60) + d) * (chrGPSLongitudeRef.Equals('E') ? 1 : -1);
+                            }
+                            break;
+                        case 0x0005:
+                            string strAltitude = BitConverter.ToBoolean(objItem.Value, 0) ? "0" : "1";
+                            break;
+                        case 0x0006:
+                            if (objItem.Value.Length == 8)
+                            {
+                                //将byte[0]~byte[3]转成uint, 除以byte[4]~byte[7]转成的uint   
+                                double dblAltitude = BitConverter.ToUInt32(objItem.Value, 0) * 1.0d / BitConverter.ToUInt32(objItem.Value, 4);
+                            }
+                            break;
+                    }
+                }
+            }
+            return s_GPS坐标;
         }
 
         private string[] _pathArray;

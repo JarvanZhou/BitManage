@@ -161,6 +161,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\上传.png" />
+    <Content Include="Images\下载.png" />
     <Content Include="Images\我的电脑.png" />
     <Content Include="Images\文件夹.png" />
     <Content Include="Images\桌面.png" />

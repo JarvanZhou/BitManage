@@ -31,13 +31,11 @@ namespace BitManage
             ImgPanel img = (sender as ImgPanel);
             if (!string.IsNullOrEmpty(img.File))
             {
-                //Bitmap bit = new Bitmap(img.File);
-                //picPanel.Bit = bit.Clone() as Bitmap;
-                //imgListPanel.Visible = false;
-                //bit.Dispose();
-                //bit = null;
-
-                this.contentControl.SetBitContent(new string[] { img.File });
+                Bitmap bit = new Bitmap(img.File);
+                picPanel.Bit = bit.Clone() as Bitmap;
+                imgListPanel.Visible = false;
+                bit.Dispose();
+                bit = null;
             }
         }
 
@@ -46,5 +44,44 @@ namespace BitManage
             imgListPanel.Visible = true;
             picPanel.Bit = null;
         }
+
+        private void imgListPanel_ItemClick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.imgListPanel.Focus();
+
+                string[] imgArray = this.imgListPanel.GetSelectedImg();
+                if (imgArray.Length > 0)
+                {
+                    this.contentControl.SetBitContent(imgArray);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void imgListPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.imgListPanel.Focus();
+        }
+
+        //private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Control && e.KeyData == Keys.A)
+        //    {
+        //        for (int i = 0; i < this.Controls.Count; i++)
+        //        {
+        //            ImgPanel ip = this.Controls[i] as ImgPanel;
+        //            if (!ip.Selected)
+        //            {
+        //                ip.Selected = true;
+        //            }
+        //        }
+        //        imgListPanel_ItemClick(null, null);
+        //    }
+        //}
     }
 }

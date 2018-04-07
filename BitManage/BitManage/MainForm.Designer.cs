@@ -48,7 +48,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 318F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 331F));
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.picPanel, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.contentControl, 2, 0);
@@ -56,7 +56,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1105, 610);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1118, 610);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // button1
@@ -91,6 +91,8 @@
             this.imgListPanel.Size = new System.Drawing.Size(527, 602);
             this.imgListPanel.TabIndex = 0;
             this.imgListPanel.ItemDoubleClick += new System.EventHandler(this.imgListPanel_ItemDoubleClick);
+            this.imgListPanel.ItemClick += new System.EventHandler(this.imgListPanel_ItemClick);
+            this.imgListPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imgListPanel_MouseClick);
             // 
             // contentControl
             // 
@@ -103,9 +105,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1110, 654);
+            this.ClientSize = new System.Drawing.Size(1105, 654);
             this.Controls.Add(this.tableLayoutPanel1);
             this.IsAllowMenu = false;
+            this.KeyPreview = true;
             this.Name = "MainForm";
             this.NewBckColor = System.Drawing.Color.WhiteSmoke;
             this.NewLeftMenuColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(197)))), ((int)(((byte)(254)))));

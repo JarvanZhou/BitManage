@@ -28,6 +28,7 @@ namespace BitManage.MidControler
         {
             if (_pathArray != null && _pathArray[0].Equals(bitpaths[0]))
             {
+                _pathArray = bitpaths;
                 return;
             }
             //第一次进来时加载配置文件
@@ -327,34 +328,42 @@ namespace BitManage.MidControler
 
 
         [CategoryAttribute("图片数据")
+            ReadOnlyAttribute(true)
         DataTableConvertAttribute("picture_width")]
         public string 图片宽 { get; set; }
 
         [CategoryAttribute("图片数据")
+            ReadOnlyAttribute(true)
         DataTableConvertAttribute("picture_height")]
         public string 图片高 { get; set; }
 
         [CategoryAttribute("图片数据")
+            ReadOnlyAttribute(true)
         DataTableConvertAttribute("picture_hr")]
         public string 水平分辨率 { get; set; }
 
         [CategoryAttribute("图片数据")
+            ReadOnlyAttribute(true)
         DataTableConvertAttribute("picture_vr")]
         public string 垂直分辨率 { get; set; }
 
         [CategoryAttribute("图片数据")
+            ReadOnlyAttribute(true)
         DataTableConvertAttribute("picture_bit")]
         public string 位深度 { get; set; }
 
         [CategoryAttribute("图片数据")
+            ReadOnlyAttribute(true)
         DataTableConvertAttribute("picture_gps")]
         public string gps信息 { get; set; }
 
         [CategoryAttribute("图片数据")
+            ReadOnlyAttribute(true)
         DataTableConvertAttribute("picture_size")]
         public string 图片大小 { get; set; }
 
         [CategoryAttribute("图片数据")
+            ReadOnlyAttribute(true)
         DataTableConvertAttribute("picture_format")]
         public string 图片格式 { get; set; }
 

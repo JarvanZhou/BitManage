@@ -15,11 +15,19 @@ namespace BitManage.MidControler
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             this.AutoScroll = true;
         }
+
         public event EventHandler ItemDoubleClick
         {
             add { _itemdoubleclick += value; }
-            remove{ _itemdoubleclick -= value; }
+            remove { _itemdoubleclick -= value; }
         }
+
+        public event EventHandler ItemClick
+        {
+            add { _itemClick += value; }
+            remove { _itemClick -= value; }
+        }
+
         public void Load(string[] files)
         {
             this.Controls.Clear();
@@ -45,6 +53,20 @@ namespace BitManage.MidControler
                 thread[i].Start();
             }
         }
+
+        public string[] GetSelectedImg()
+        {
+            List<string> imagePathList = new List<string>();
+            for (int i = 0; i < this.Controls.Count; i++)
+            {
+                ImgPanel ip = this.Controls[i] as ImgPanel;
+                if (ip.Selected)
+                {
+                    imagePathList.Add(ip.File);
+                }
+            }
+            return imagePathList.ToArray();
+        }
         /// <summary>
         /// 控件选择
         /// </summary>
@@ -63,7 +85,7 @@ namespace BitManage.MidControler
             {
                 int index = this.Controls.GetChildIndex(img);
                 int start = _start > index ? index : _start;
-                int end= _start > index ? _start : index;
+                int end = _start > index ? _start : index;
                 int len = this.Controls.Count;
                 for (int i = 0; i < len; ++i)
                 {
@@ -80,6 +102,7 @@ namespace BitManage.MidControler
                 img.Selected = true;
                 _start = this.Controls.GetChildIndex(img);
             }
+            _itemClick?.Invoke(sender, e);
         }
 
         private void Start()
@@ -105,6 +128,23 @@ namespace BitManage.MidControler
             }
         }
 
+        //protected override void OnKeyDown(KeyEventArgs e)
+        //{
+        //    if (e.Control && e.KeyData == Keys.A)
+        //    {
+        //        for (int i = 0; i < this.Controls.Count; i++)
+        //        {
+        //            ImgPanel ip = this.Controls[i] as ImgPanel;
+        //            if (!ip.Selected)
+        //            {
+        //                ip.Selected = true;
+        //            }
+        //        }
+        //        _itemClick?.Invoke(this, null);
+        //    }
+        //    base.OnKeyDown(e);
+        //}
+
         private int _index;
         private int _count;
         private int _threadindex;
@@ -112,5 +152,6 @@ namespace BitManage.MidControler
         private string[] _files;
         private int _start = 0;
         private EventHandler _itemdoubleclick;
+        private EventHandler _itemClick;
     }
 }
